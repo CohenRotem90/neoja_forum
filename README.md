@@ -1,225 +1,197 @@
-Neoja Q&A Forum Application
-A real-time forum application where users can post questions, answer them, and see new responses immediately. The application is built using Flutter for the frontend and Flask with Socket.IO for the backend. MongoDB is used as the database, and the entire application can be run using Docker and Docker Compose.
+# Neoja Q&A Forum Application
 
-Table of Contents
-Features
+A real-time forum application where users can post questions, answer them, and see new responses immediately. The application is built using **Flutter** for the frontend and **Flask** with **Socket.IO** for the backend. MongoDB is used as the database, and the entire application can be run using Docker and Docker Compose.
 
-Technologies Used
+---
 
-Prerequisites
+## Table of Contents
 
-Installation
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Running the Application](#running-the-application)
+  - [Using Docker and Docker Compose](#using-docker-and-docker-compose)
+  - [Running Without Docker](#running-without-docker)
+- [API Endpoints](#api-endpoints)
+- [WebSocket Events](#websocket-events)
 
-Running the Application
+---
 
-Using Docker and Docker Compose
+## Features
 
-Running Without Docker
+- **Real-Time Updates**: Users can see new answers to questions immediately without refreshing the page.
+- **Post Questions**: Users can post new questions to the forum.
+- **Answer Questions**: Users can post answers to existing questions.
+- **Responsive UI**: The frontend is built with Flutter, providing a responsive and attractive user interface.
+- **Persistent Data**: All data is stored in MongoDB.
+- **Dockerized Deployment**: Easy setup and deployment using Docker and Docker Compose.
 
-Project Structure
+---
 
-API Endpoints
+## Technologies Used
 
-WebSocket Events
+- **Frontend**: Flutter (Dart)
+- **Backend**: Flask (Python) with Flask-SocketIO
+- **Database**: MongoDB
+- **Real-Time Communication**: Socket.IO
+- **Containerization**: Docker and Docker Compose
 
-Features
-Real-Time Updates: Users can see new answers to questions immediately without refreshing the page.
+---
 
-Post Questions: Users can post new questions to the forum.
+## Installation
 
-Answer Questions: Users can post answers to existing questions.
+### Clone the Repository
 
-Responsive UI: The frontend is built with Flutter, providing a responsive and attractive user interface.
+```bash
+git clone https://github.com/yourusername/neoja-qna-forum.git
+cd neoja-qna-forum
+```
 
-Persistent Data: All data is stored in MongoDB, ensuring persistence across sessions.
+---
 
-Dockerized Deployment: Easy setup and deployment using Docker and Docker Compose.
+## Running the Application
 
-Technologies Used
-Frontend: Flutter (Dart)
+### Using Docker and Docker Compose
 
-Backend: Flask (Python) with Flask-SocketIO
+#### Build and Start the Services
 
-Database: MongoDB
-
-Real-Time Communication: Socket.IO
-
-Containerization: Docker and Docker Compose
-
-Web Server: Nginx (for serving the Flutter web app)
-
-Prerequisites
-Docker and Docker Compose installed on your system.
-
-Internet Connection for pulling Docker images and dependencies.
-
-Installation
-1. Clone the Repository
-bash
-git clone https://github.com/yourusername/realtime-qna-app.git
-cd realtime-qna-app
-2. Directory Structure
-Ensure your project directory has the following structure:
-
-realtime-qna-app/
-├── backend/
-│   ├── app.py
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   └── ... (other backend files)
-├── frontend/
-│   ├── lib/
-│   │   ├── services/
-│   │   │   └── api_service.dart
-│   │   └── ... (other Flutter code)
-│   ├── pubspec.yaml
-│   ├── Dockerfile
-│   └── ... (other frontend files)
-├── mongo-init.js
-├── docker-compose.yml
-└── README.md
-Running the Application
-Using Docker and Docker Compose
-This is the recommended method for running the application, as it simplifies the setup process by containerizing all components.
-
-1. Build and Start the Services
 From the root directory of the project, run:
 
-bash
+```bash
 docker-compose up --build
-This command builds the Docker images and starts all the services defined in docker-compose.yml.
+```
 
-2. Access the Application
-Frontend: Open your web browser and navigate to http://localhost.
+- This command builds the Docker images and starts all the services defined in `docker-compose.yml`.
 
-Backend: The backend API can be accessed at http://localhost:5000.
+#### Access the Application
 
-3. Verify the Services
-To list all running containers:
+- Open your web browser and navigate to `http://localhost`.
 
-bash
-docker ps
-To view the logs of all services:
+### Running Without Docker
 
-bash
-docker-compose logs -f
-Running Without Docker
-If you prefer to run the application without Docker, follow these steps.
+#### Backend Setup
 
-Backend Setup
-Install Python 3.12 or higher.
+1. **Install Python 3.12 or higher**.
 
-Create a Virtual Environment:
+2. **Create a Virtual Environment**:
 
-bash
-cd backend
-python -m venv venv
-Activate the Virtual Environment:
+   ```bash
+   cd backend
+   python -m venv venv
+   ```
 
-Windows:
+3. **Activate the Virtual Environment**:
 
-bash
-venv\Scripts\activate
-macOS/Linux:
+   - **Windows**:
 
-bash
-source venv/bin/activate
-Install Dependencies:
+     ```bash
+     venv\Scripts\activate
+     ```
 
-bash
-pip install -r requirements.txt
-Run the Flask App:
+   - **macOS/Linux**:
 
-bash
-python app.py
-Ensure that the Flask app is running on http://0.0.0.0:5000.
+     ```bash
+     source venv/bin/activate
+     ```
 
-Frontend Setup
-Install Flutter SDK: Follow the instructions on Flutter's official website to install the Flutter SDK.
+4. **Install Dependencies**:
 
-Navigate to the Frontend Directory:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-bash
-cd frontend
-Get Flutter Dependencies:
+5. **Run the Flask App**:
 
-bash
-flutter pub get
-Update API Base URL:
+   ```bash
+   python app.py
+   ```
 
-In lib/services/api_service.dart, set the baseUrl to point to the backend URL:
+     - Ensure that the Flask app is running on `http://0.0.0.0:5000`.
 
-dart
-// lib/services/api_service.dart
-class ApiService {
-  static String baseUrl = 'http://localhost:5000';
-  // ... rest of the code
-}
-Run the Flutter App:
+#### Frontend Setup
 
-For web:
+1. **Install Flutter SDK**: Follow the instructions on [Flutter's official website](https://flutter.dev/docs/get-started/install).
 
-bash
-flutter run -d chrome
-For mobile emulator or physical device:
+2. **Navigate to the Frontend Directory**:
 
-bash
-flutter run
-Project Structure
-backend/: Contains the Flask backend application.
+   ```bash
+   cd frontend
+   ```
 
-frontend/: Contains the Flutter frontend application.
+3. **Get Flutter Dependencies**:
 
-mongo-init.js: Initialization script for MongoDB to create the qna_db database and populate it with sample data.
+   ```bash
+   flutter pub get
+   ```
 
-docker-compose.yml: Docker Compose configuration to orchestrate the services.
+4. **Update API Base URL**:
 
-README.md: Documentation and instructions.
+   - In `lib/services/api_service.dart`, set the `baseUrl` to point to the backend URL:
 
-API Endpoints
-Questions
-GET /questions: Retrieve all questions.
+     ```dart
+     // lib/services/api_service.dart
+     class ApiService {
+       static String baseUrl = 'http://localhost:5000';
+       // ... rest of the code
+     }
+     ```
 
-POST /questions: Create a new question.
+5. **Run the Flutter App**:
 
-Body Parameters:
+   - For web:
 
-title (string): Title of the question.
+     ```bash
+     flutter run -d chrome
+     ```
 
-content (string): Content of the question.
+   - For mobile emulator or physical device:
 
-GET /questions/<question_id>: Retrieve a specific question by ID.
+     ```bash
+     flutter run
+     ```
 
-DELETE /questions/<question_id>: Delete a specific question.
+---
 
-PUT /questions/<question_id>: Update a specific question.
+## API Endpoints
 
-Answers
-POST /questions/<question_id>/answers: Add an answer to a question.
+### Questions
 
-Body Parameters:
+- **GET /questions**: Retrieve all questions.
+- **POST /questions**: Create a new question.
+  - **Body Parameters**:
+    - `title` (string): Title of the question.
+    - `content` (string): Content of the question.
+- **GET /questions/<question_id>**: Retrieve a specific question by ID.
+- **PUT /questions/<question_id>**: Update a specific question.
+  - **Body Parameters**:
+    - `title` (string): Updated title of the question.
+    - `content` (string): Updated content of the question.
+- **DELETE /questions/<question_id>**: Delete a specific question.
 
-content (string): Content of the answer.
+### Answers
 
-GET /questions/<question_id>/answers: Retrieve all answers for a specific question.
+- **POST /questions/<question_id>/answers**: Add an answer to a question.
+  - **Body Parameters**:
+    - `content` (string): Content of the answer.
+- **GET /questions/<question_id>/answers**: Retrieve all answers for a specific question.
 
-WebSocket Events
-Event: new_answer
+---
 
-Description: Broadcasts a new answer to all clients connected to the room corresponding to the question ID.
+## WebSocket Events
 
-Data:
+- **Event**: `new_answer`
+  - **Description**: Broadcasts a new answer to all clients connected to the room corresponding to the question ID.
+  - **Data**:
+    - `question_id` (string): ID of the question.
+    - `answer` (object): The new answer added.
 
-question_id (string): ID of the question.
+- **Event**: `join`
+  - **Description**: Client requests to join a room (question ID).
+  - **Data**:
+    - `room` (string): The room (question ID) to join.
 
-answer (object): The new answer added.
+---
 
-Event: join
+**Enjoy using the Neoja Q&A Forum Application!**
 
-Description: Client requests to join a room (question ID).
-
-Data:
-
-room (string): The room (question ID) to join.
-
-Enjoy using the Real-Time Q&A Application! If you have any issues or suggestions, feel free to open an issue or submit a pull request.
+---
